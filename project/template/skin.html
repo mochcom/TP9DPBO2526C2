@@ -1,0 +1,77 @@
+<!doctype html> <!-- Mendeklarasikan tipe dokumen sebagai HTML5 -->
+<html lang="id"> <!-- Membuka elemen root HTML berbahasa Indonesia -->
+<head> <!-- Membuka bagian kepala dokumen -->
+  <meta charset="utf-8" /> <!-- Menentukan pengkodean karakter UTF-8 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" /> <!-- Mengatur tata letak responsif sesuai layar -->
+  <title>Daftar Kandidat Karyawan</title> <!-- Menentukan judul halaman di tab browser -->
+  <style> /* Membuka blok gaya CSS internal */
+    :root{ /* Mendefinisikan variabel desain global */
+      --bg: #f7f8fb; /* Warna latar belakang halaman */
+      --card: #ffffff; /* Warna latar kartu utama */
+      --muted: #6b7280; /* Warna teks sekunder */
+      --accent: #2563eb; /* Warna aksen biru utama */
+      --danger: #dc2626; /* Warna merah aksi hapus */
+      --border: #e6e9ef; /* Warna garis tepi */
+      --radius: 8px; /* Ukuran sudut membulat kartu */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; /* Menetapkan jenis huruf utama */
+      color-scheme: light; /* Menetapkan skema warna terang */
+    } /* Menutup blok variabel :root */
+    html,body{height:100%;margin:0;background:var(--bg);color:#0f172a;} /* Mengatur gaya dasar latar dan teks halaman */
+    .container{max-width:980px;margin:36px auto;padding:18px;} /* Membatasi lebar maksimum konten dan menempatkannya di tengah */
+    .nav-tabs{display:flex;gap:8px;margin-bottom:16px;} /* Menyusun tab navigasi antar modul secara horizontal */
+    .nav-tab{padding:9px 16px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--border);} /* Gaya dasar tab navigasi yang tidak aktif */
+    .nav-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);} /* Gaya tab navigasi yang sedang aktif */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 1px 3px rgba(16,24,40,0.04);} /* Membentuk kartu putih pembungkus tabel */
+    h1{margin:0 0 14px 0;font-size:20px;color:#0f172a;} /* Mengatur ukuran dan margin judul utama */
+    table{width:100%;border-collapse:collapse;font-size:14px;} /* Mengatur lebar penuh dan batas rapat tabel */
+    thead th{text-align:left;padding:12px 10px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);} /* Mengatur gaya judul kolom tabel */
+    tbody td{padding:12px 10px;border-bottom:1px solid var(--bg);vertical-align:middle;} /* Mengatur gaya isi sel tabel */
+    tbody tr:last-child td{border-bottom:0;} /* Menghilangkan garis bawah pada baris terakhir tabel */
+    .col-id{width:48px;color:var(--muted);} /* Membatasi lebar kolom nomor urut */
+    .col-actions{width:160px;text-align:right;} /* Mengatur lebar dan perataan kanan kolom aksi */
+    .btn{display:inline-block;padding:7px 12px;border-radius:6px;border:1px solid transparent;font-size:13px;cursor:pointer;text-decoration:none;} /* Gaya dasar tombol aksi */
+    .btn-edit{background:transparent;color:var(--accent);font-weight:600;} /* Gaya tombol Edit berwarna biru */
+    .btn-delete{background:transparent;color:var(--danger);font-weight:600;border:none;} /* Gaya tombol Hapus berwarna merah */
+    .btn-add{background:var(--accent);color:#fff;font-weight:600;} /* Gaya tombol Tambah Kandidat berwarna biru solid */
+    .footer-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border);} /* Mengatur bilah bawah untuk total kandidat dan tombol tambah */
+    tbody tr:hover td{background:rgba(37,99,235,0.02);} /* Memberi sorotan lembut saat kursor melintasi baris tabel */
+  </style> <!-- Menutup blok gaya CSS internal -->
+</head> <!-- Menutup bagian kepala dokumen -->
+<body> <!-- Membuka bagian isi halaman -->
+  <div class="container"> <!-- Membuka pembungkus utama konten -->
+    <nav class="nav-tabs"> <!-- Membuka menu tab navigasi antar modul -->
+      <a href="index.php?modul=kandidat" class="nav-tab active">Daftar Kandidat</a> <!-- Tab aktif untuk halaman modul kandidat -->
+      <a href="index.php?modul=lowongan" class="nav-tab">Daftar Lowongan</a> <!-- Tautan tab menuju halaman modul lowongan -->
+    </nav> <!-- Menutup menu tab navigasi -->
+    <div class="card"> <!-- Membuka kartu utama daftar kandidat -->
+      <h1>Daftar Kandidat Karyawan</h1> <!-- Menampilkan judul halaman daftar kandidat -->
+      <div style="overflow:auto;"> <!-- Membuka pembungkus gulir horizontal tabel -->
+        <table> <!-- Membuka tabel daftar kandidat -->
+          <thead> <!-- Membuka bagian header tabel -->
+            <tr> <!-- Membuka baris judul kolom -->
+              <th class="col-id">No</th> <!-- Kolom nomor urut -->
+              <th>Nama</th> <!-- Kolom nama kandidat -->
+              <th>Posisi Dilamar</th> <!-- Kolom posisi yang dilamar -->
+              <th>Domisili</th> <!-- Kolom domisili kandidat -->
+              <th>Skor Tes</th> <!-- Kolom skor tes kandidat -->
+              <th>Pengalaman</th> <!-- Kolom lama pengalaman kerja -->
+              <th class="col-actions">Aksi</th> <!-- Kolom aksi Edit dan Hapus -->
+            </tr> <!-- Menutup baris judul kolom -->
+          </thead> <!-- Menutup bagian header tabel -->
+          <tbody> <!-- Membuka bagian isi data tabel -->
+            {{TABLE_ROWS}} <!-- Placeholder baris tabel <tr> yang diganti oleh ViewKandidat -->
+          </tbody> <!-- Menutup bagian isi tabel -->
+        </table> <!-- Menutup elemen tabel -->
+      </div> <!-- Menutup pembungkus gulir horizontal -->
+      <div class="footer-bar"> <!-- Membuka bilah bawah tabel -->
+        <div style="color:var(--muted);font-size:13px"> <!-- Membuka teks total kandidat -->
+          Total Kandidat: <strong style="color:#0f172a">{{TOTAL_DATA}}</strong> <!-- Placeholder angka total kandidat dari Presenter -->
+        </div> <!-- Menutup teks total kandidat -->
+        <div> <!-- Membuka pembungkus tombol tambah -->
+          <a href="index.php?modul=kandidat&screen=add" class="btn btn-add">+ Tambah Kandidat</a> <!-- Tautan menuju form tambah kandidat baru -->
+        </div> <!-- Menutup pembungkus tombol tambah -->
+      </div> <!-- Menutup bilah bawah tabel -->
+    </div> <!-- Menutup kartu utama -->
+  </div> <!-- Menutup pembungkus utama -->
+</body> <!-- Menutup isi halaman -->
+</html> <!-- Menutup elemen root HTML -->

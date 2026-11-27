@@ -1,0 +1,81 @@
+<!doctype html> <!-- Mendeklarasikan tipe dokumen sebagai HTML5 -->
+<html lang="id"> <!-- Membuka elemen root HTML dengan bahasa halaman Indonesia -->
+<head> <!-- Membuka bagian kepala dokumen untuk metadata dan styling -->
+  <meta charset="utf-8" /> <!-- Menentukan pengkodean karakter UTF-8 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" /> <!-- Mengatur tampilan responsif sesuai lebar layar perangkat -->
+  <title>Daftar Lowongan Pekerjaan</title> <!-- Menentukan judul halaman pada tab browser -->
+  <style> /* Membuka blok gaya CSS internal */
+    :root{ /* Mendefinisikan variabel warna dan font global */
+      --bg: #f7f8fb; /* Warna latar belakang utama halaman */
+      --card: #ffffff; /* Warna latar belakang kartu kontainer */
+      --muted: #6b7280; /* Warna teks sekunder atau label redup */
+      --accent: #2563eb; /* Warna aksen biru utama untuk tombol dan tab aktif */
+      --danger: #dc2626; /* Warna merah untuk tombol aksi hapus */
+      --border: #e6e9ef; /* Warna garis batas kartu dan tabel */
+      --radius: 8px; /* Ukuran sudut membulat standar komponen */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; /* Menetapkan jenis huruf sistem modern */
+      color-scheme: light; /* Menetapkan skema warna terang pada elemen bawaan browser */
+    } /* Menutup blok variabel :root */
+    html,body{height:100%;margin:0;background:var(--bg);color:#0f172a;} /* Mengatur tinggi penuh, margin nol, warna latar, dan warna teks utama */
+    .container{max-width:1120px;margin:36px auto;padding:18px;} /* Membatasi lebar konten utama dan memposisikannya di tengah layar */
+    .nav-tabs{display:flex;gap:8px;margin-bottom:16px;} /* Membuat baris menu tab navigasi horizontal antar modul */
+    .nav-tab{padding:9px 16px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--border);} /* Memberi gaya dasar tombol tab navigasi tidak aktif */
+    .nav-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);} /* Memberi warna biru mencolok pada tab modul yang sedang dibuka */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 1px 3px rgba(16,24,40,0.04);} /* Membentuk wadah kartu putih dengan garis tepi dan bayangan halus */
+    h1{margin:0 0 14px 0;font-size:20px;color:#0f172a;} /* Mengatur ukuran dan jarak judul utama halaman */
+    table{width:100%;border-collapse:collapse;font-size:14px;} /* Mengatur tabel selebar penuh kontainer dengan garis batas rapat */
+    thead th{text-align:left;padding:12px 10px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);} /* Mengatur gaya sel judul kolom header tabel */
+    tbody td{padding:12px 10px;border-bottom:1px solid var(--bg);vertical-align:middle;} /* Mengatur jarak dan perataan vertikal sel isi tabel */
+    tbody tr:last-child td{border-bottom:0;} /* Menghilangkan garis bawah pada baris terakhir tabel */
+    .col-id{width:48px;color:var(--muted);} /* Membatasi lebar dan warna kolom nomor urut */
+    .col-actions{width:150px;text-align:right;white-space:nowrap;} /* Membatasi lebar kolom aksi dan mencegah tombol turun baris */
+    .badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;} /* Gaya dasar label kapsul untuk kolom status lowongan */
+    .badge-open{background:#dcfce7;color:#166534;} /* Warna hijau lembut untuk status lowongan Dibuka */
+    .badge-closed{background:#fee2e2;color:#991b1b;} /* Warna merah lembut untuk status lowongan Ditutup */
+    .btn{display:inline-block;padding:7px 12px;border-radius:6px;border:1px solid transparent;font-size:13px;cursor:pointer;text-decoration:none;} /* Gaya dasar seluruh tombol aksi */
+    .btn-edit{background:transparent;color:var(--accent);font-weight:600;} /* Gaya tombol Edit berwarna biru teks */
+    .btn-delete{background:transparent;color:var(--danger);font-weight:600;border:none;} /* Gaya tombol Hapus berwarna merah teks */
+    .btn-add{background:var(--accent);color:#fff;font-weight:600;} /* Gaya tombol Tambah Lowongan berwarna biru solid */
+    .footer-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border);} /* Mengatur bilah bawah tabel untuk total data dan tombol tambah */
+    tbody tr:hover td{background:rgba(37,99,235,0.02);} /* Memberikan efek sorotan lembut saat kursor berada di atas baris tabel */
+  </style> <!-- Menutup blok gaya CSS internal -->
+</head> <!-- Menutup bagian kepala dokumen -->
+<body> <!-- Membuka bagian isi halaman yang tampil di browser -->
+  <div class="container"> <!-- Membuka pembungkus utama berbatas lebar tengah -->
+    <nav class="nav-tabs"> <!-- Membuka bar navigasi tab untuk berpindah antar modul -->
+      <a href="index.php?modul=kandidat" class="nav-tab">Daftar Kandidat</a> <!-- Tautan tab menuju halaman daftar modul kandidat -->
+      <a href="index.php?modul=lowongan" class="nav-tab active">Daftar Lowongan</a> <!-- Tautan tab aktif untuk halaman daftar modul lowongan -->
+    </nav> <!-- Menutup bar navigasi tab -->
+    <div class="card"> <!-- Membuka wadah kartu utama tabel lowongan -->
+      <h1>Daftar Lowongan Pekerjaan</h1> <!-- Menampilkan judul utama halaman daftar lowongan -->
+      <div style="overflow:auto;"> <!-- Membuka pembungkus gulir horizontal agar tabel responsif di layar sempit -->
+        <table> <!-- Membuka elemen tabel data lowongan -->
+          <thead> <!-- Membuka bagian header tabel -->
+            <tr> <!-- Membuka baris judul kolom tabel -->
+              <th class="col-id">No</th> <!-- Judul kolom nomor urut -->
+              <th>Judul Lowongan</th> <!-- Judul kolom posisi lowongan -->
+              <th>Perusahaan</th> <!-- Judul kolom nama perusahaan -->
+              <th>PIC Rekruter</th> <!-- Judul kolom nama PIC rekruter (artis kelas dunia) -->
+              <th>Gaji</th> <!-- Judul kolom estimasi gaji bulanan -->
+              <th>Status</th> <!-- Judul kolom status lowongan -->
+              <th>Kandidat Terpilih</th> <!-- Judul kolom nama kandidat hasil relasi LEFT JOIN -->
+              <th class="col-actions">Aksi</th> <!-- Judul kolom tombol Edit dan Hapus -->
+            </tr> <!-- Menutup baris judul kolom tabel -->
+          </thead> <!-- Menutup bagian header tabel -->
+          <tbody> <!-- Membuka bagian isi baris data tabel -->
+            {{TABLE_ROWS}} <!-- Placeholder yang diganti ViewLowongan dengan baris <tr> dari Presenter -->
+          </tbody> <!-- Menutup bagian isi tabel -->
+        </table> <!-- Menutup elemen tabel -->
+      </div> <!-- Menutup pembungkus gulir horizontal -->
+      <div class="footer-bar"> <!-- Membuka bilah bawah untuk ringkasan jumlah data dan tombol tambah -->
+        <div style="color:var(--muted);font-size:13px"> <!-- Membuka teks informasi total data lowongan -->
+          Total Lowongan: <strong style="color:#0f172a">{{TOTAL_DATA}}</strong> <!-- Placeholder jumlah total lowongan dari Presenter -->
+        </div> <!-- Menutup teks informasi total data -->
+        <div> <!-- Membuka pembungkus tombol tambah lowongan -->
+          <a href="index.php?modul=lowongan&screen=add" class="btn btn-add">+ Tambah Lowongan</a> <!-- Tautan untuk membuka halaman form tambah lowongan baru -->
+        </div> <!-- Menutup pembungkus tombol tambah -->
+      </div> <!-- Menutup bilah bawah tabel -->
+    </div> <!-- Menutup wadah kartu utama -->
+  </div> <!-- Menutup pembungkus utama halaman -->
+</body> <!-- Menutup bagian isi dokumen HTML -->
+</html> <!-- Menutup elemen root HTML -->

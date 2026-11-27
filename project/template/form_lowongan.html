@@ -1,0 +1,75 @@
+<!doctype html> <!-- Mendeklarasikan tipe dokumen sebagai HTML5 -->
+<html lang="id"> <!-- Membuka elemen root HTML berbahasa Indonesia -->
+<head> <!-- Membuka bagian kepala dokumen -->
+  <meta charset="utf-8" /> <!-- Menentukan pengkodean karakter UTF-8 -->
+  <meta name="viewport" content="width=device-width,initial-scale=1" /> <!-- Mengatur tampilan agar responsif pada berbagai ukuran layar -->
+  <title>Form Lowongan Pekerjaan</title> <!-- Menentukan judul halaman form di tab browser -->
+  <style> /* Membuka blok gaya CSS internal */
+    :root{ /* Mendefinisikan variabel desain global form */
+      --bg: #f7f8fb; /* Warna latar belakang halaman */
+      --card: #ffffff; /* Warna latar kartu form */
+      --muted: #6b7280; /* Warna label dan tombol batal */
+      --accent: #2563eb; /* Warna biru tombol simpan */
+      --border: #e6e9ef; /* Warna garis tepi input dan kartu */
+      --radius: 8px; /* Radius sudut kartu */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; /* Menetapkan jenis huruf antarmuka */
+    } /* Menutup blok variabel :root */
+    html,body{height:100%;margin:0;background:var(--bg);color:#0f172a;} /* Mengatur gaya dasar elemen halaman */
+    .container{max-width:650px;margin:36px auto;padding:18px;} /* Membatasi lebar form di tengah layar */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:0 1px 3px rgba(16,24,40,0.04);} /* Membentuk kartu putih pembungkus form */
+    h1{margin:0 0 16px;font-size:20px;color:#0f172a;} /* Mengatur gaya judul form */
+    form{display:grid;grid-template-columns:1fr 1fr;gap:14px;} /* Menyusun kolom input form dalam tata letak grid 2 kolom */
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500;} /* Mengatur tampilan label di atas setiap input */
+    input[type="text"],input[type="number"],select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;box-sizing:border-box;background:#fff;} /* Menyeragamkan gaya kolom input teks, angka, dan dropdown select */
+    .full{grid-column:1/-1;} /* Membuat elemen membentang penuh melewati kedua kolom grid */
+    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:10px;} /* Menjajarkan tombol Batal dan Simpan di sisi kanan bawah */
+    .btn{padding:9px 16px;border-radius:6px;border:1px solid transparent;font-size:14px;cursor:pointer;text-decoration:none;} /* Gaya dasar tombol form */
+    .btn-primary{background:var(--accent);color:#fff;font-weight:600;} /* Gaya tombol utama Simpan berwarna biru */
+    .btn-muted{background:transparent;border:1px solid var(--border);color:var(--muted);} /* Gaya tombol sekunder Batal bergaris tepi */
+  </style> <!-- Menutup blok gaya CSS internal -->
+</head> <!-- Menutup bagian kepala dokumen -->
+<body> <!-- Membuka bagian isi halaman -->
+  <div class="container"> <!-- Membuka pembungkus utama form -->
+    <div class="card"> <!-- Membuka kartu form -->
+      <h1>{{FORM_TITLE}}</h1> <!-- Placeholder judul form ('Tambah Lowongan Baru' atau 'Ubah Data Lowongan') -->
+      <form method="post" action="index.php?modul=lowongan"> <!-- Membuka form POST yang mengirim data ke routing modul lowongan -->
+        <input type="hidden" name="modul" value="lowongan"> <!-- Menyertakan identitas modul lowongan secara eksplisit pada payload POST -->
+        <input type="hidden" name="action" value="{{ACTION}}"> <!-- Placeholder aksi POST ('tambah' atau 'ubah') -->
+        <input type="hidden" name="id" value="{{ID}}"> <!-- Placeholder ID lowongan yang terisi saat mode edit -->
+        <div> <!-- Membuka kolom input judul lowongan -->
+          <label for="judulLowongan">Judul Lowongan</label> <!-- Label untuk input judul lowongan -->
+          <input id="judulLowongan" name="judulLowongan" type="text" placeholder="Misal: Senior Backend Engineer" value="{{JUDUL_LOWONGAN}}" required> <!-- Input teks wajib untuk judul lowongan dengan placeholder nilai prefill -->
+        </div> <!-- Menutup kolom input judul lowongan -->
+        <div> <!-- Membuka kolom input perusahaan -->
+          <label for="perusahaan">Perusahaan</label> <!-- Label untuk input nama perusahaan -->
+          <input id="perusahaan" name="perusahaan" type="text" placeholder="Misal: Swift Tech Studios" value="{{PERUSAHAAN}}" required> <!-- Input teks wajib untuk nama perusahaan dengan nilai prefill -->
+        </div> <!-- Menutup kolom input perusahaan -->
+        <div> <!-- Membuka kolom input PIC rekruter -->
+          <label for="picRekruter">PIC Rekruter</label> <!-- Label untuk input nama PIC rekruter -->
+          <input id="picRekruter" name="picRekruter" type="text" placeholder="Misal: Taylor Swift" value="{{PIC_REKRUTER}}" required> <!-- Input teks wajib untuk nama PIC rekruter dengan nilai prefill -->
+        </div> <!-- Menutup kolom input PIC rekruter -->
+        <div> <!-- Membuka kolom input gaji -->
+          <label for="gajiJuta">Estimasi Gaji (Juta Rp)</label> <!-- Label untuk input estimasi gaji -->
+          <input id="gajiJuta" name="gajiJuta" type="number" min="0" step="1" value="{{GAJI_JUTA}}" required> <!-- Input angka minimal 0 untuk gaji bulanan dalam satuan juta -->
+        </div> <!-- Menutup kolom input gaji -->
+        <div> <!-- Membuka kolom pilihan status lowongan -->
+          <label for="status">Status Lowongan</label> <!-- Label untuk dropdown status lowongan -->
+          <select id="status" name="status" required> <!-- Elemen dropdown pemilihan status lowongan -->
+            {{STATUS_OPTIONS}} <!-- Placeholder kumpulan tag <option> status yang dirakit Presenter -->
+          </select> <!-- Menutup elemen dropdown status -->
+        </div> <!-- Menutup kolom pilihan status -->
+        <div> <!-- Membuka kolom pilihan relasi kandidat terpilih -->
+          <label for="idKandidat">Kandidat Terpilih (Opsional)</label> <!-- Label untuk dropdown kandidat unggulan -->
+          <select id="idKandidat" name="idKandidat"> <!-- Elemen dropdown pemilihan Foreign Key idKandidat (boleh kosong) -->
+            {{KANDIDAT_OPTIONS}} <!-- Placeholder kumpulan tag <option> kandidat yang dirakit Presenter -->
+          </select> <!-- Menutup elemen dropdown kandidat -->
+        </div> <!-- Menutup kolom pilihan kandidat -->
+        <div class="full actions"> <!-- Membuka baris tombol aksi di bagian bawah form -->
+          <a href="index.php?modul=lowongan" class="btn btn-muted">Batal</a> <!-- Tautan untuk membatalkan dan kembali ke daftar lowongan -->
+          <button type="submit" class="btn btn-primary">Simpan</button> <!-- Tombol submit untuk mengirim form ke server -->
+        </div> <!-- Menutup baris tombol aksi -->
+      </form> <!-- Menutup elemen form -->
+    </div> <!-- Menutup kartu form -->
+  </div> <!-- Menutup pembungkus utama form -->
+</body> <!-- Menutup bagian isi dokumen HTML -->
+</html> <!-- Menutup elemen root HTML -->
